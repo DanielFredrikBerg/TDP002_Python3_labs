@@ -13,4 +13,3 @@ def flag(width):
             print()
         else:
             print(10*width*"*"+" "+10*width*"*")
-
