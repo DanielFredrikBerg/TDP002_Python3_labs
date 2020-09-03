@@ -6,7 +6,7 @@ def main1():
 
 def main2():
     numbers = [1,2,3]
-    numbers_reference = [1,2,3]
+    numbers_reference = numbers.copy()
 
 #bild 3
 def add_element(l, e):
