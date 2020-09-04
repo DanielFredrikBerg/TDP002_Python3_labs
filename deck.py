@@ -3,28 +3,31 @@
 import card
 import random
 
-def create_deck():
+#is broken, pls fix
+#cant insert, out of bounds
+def create_deck(add_jokers = False):
     deck = ['deck',[]]
     for suit in range(1,5):
         for value in range(1,14):
-            deck[1].append(card.create_card(value,suit))
+#            deck[1].append(card.create_card(value,suit))
+            insert_card(card.create_card(value,suit), deck[1])
+    if add_jokers:
+        for i in range(2):
+            insert_card(card.create(0,i+1), deck[1])
     return deck
 
-def add_jokers(deck):
-    for j in range(2):
-        deck[1].append(card.create_card(0,j+1))
+#def add_jokers(deck):
+#    for j in range(2):
+#        deck[1].append(card.create_card(0,j+1))
 
-def find_card(deck, value, suit):
-    i = 0
-    for card in deck[1]:
-        if card == (value, suit):
-            return i
-        i += 1
+def find_card(deck, card):
+    return deck[1].index(card)
 
 def split_deck(deck, position):
+    deck_slice = ['deck',[]]
     for i in range(position):
-        move_card(0, len(deck[1]), deck)
-    return deck
+        insert_card(take_card(deck, 0),deck_slice)
+    return deck_slice[1].reverse()
 
 def insert_card(card, deck, pos = 0):
     deck[1].insert(pos, card)
