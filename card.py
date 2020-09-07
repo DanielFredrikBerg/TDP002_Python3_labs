@@ -36,15 +36,21 @@ def get_suit(select):
 #    return possible_suits[suit]
 
 def create_card(value, suit):
-    if value == 0:
-        card = (0,0)
-    else:
+#    if value == 0:
+#        card = (0,0)
+#    else:
         #Fix alla metoder efter nummeriska tupler nedan
-        card = (value, suit)
+    card = (value, suit)
     return card
 
 def display_card(card):
     if card[0] == 0:
         print("Joker")
     else:
-        print(return_value(card[0]) + " of " + return_suit(card[1]))
+        print(get_value(card[0]) + " of " + get_suit(card[1]))
+
+def get_key_value(card):
+    return card[0]
+
+def get_key_suit(card):
+    return card[1]
