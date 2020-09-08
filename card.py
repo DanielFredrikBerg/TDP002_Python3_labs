@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 def get_value(value):
     values = {
-        0 : 'Joker',
         1 : 'Ace',
         2 : 'Two',
         3 : 'Three',
@@ -14,7 +13,21 @@ def get_value(value):
         10: 'Ten',
         11: 'Jack',
         12: 'Queen',
-        13: 'King'
+        13: 'King',
+        14: 'Ace',
+        15: 'Two',
+        16: 'Three',
+        17: 'Four',
+        18: 'Five',
+        19: 'Six',
+        20: 'seven',
+        21: 'Eight',
+        22: 'Nine',
+        23: 'Ten',
+        24: 'Jack',
+        25: 'Queen',
+        26: 'King',
+        27: 'Joker'
     }
     return values[value]
 
@@ -43,11 +56,20 @@ def create_card(value, suit):
     card = (value, suit)
     return card
 
+#def display_card(card):
+#    if card[0] == 0:
+#        print("Joker")
+#    else:
+#        print(get_value(card[0]) + " of " + get_suit(card[1]))
+
 def display_card(card):
-    if card[0] == 0:
+    if card[0] == 27:
         print("Joker")
+    elif card[0] > 13:
+        print(get_value(card[0]) + " of " + get_suit(2))
     else:
-        print(get_value(card[0]) + " of " + get_suit(card[1]))
+        print(get_value(card[0]) + " of " + get_suit(1))
+
 
 def get_key_value(card):
     return card[0]

@@ -3,14 +3,25 @@
 import card
 import random
 
-def create_deck(add_jokers = False):
-    deck = ['deck',[]]
-    for suit in range(1,5):
-        for value in range(1,14):
-            insert_card(card.create_card(value,suit), deck)
-    if add_jokers:
-        for i in range(2):
-            insert_card(card.create_card(0,i+1), deck)
+#def create_deck(add_jokers = False):
+#    deck = ['deck',[]]
+#    for suit in range(1,5):
+#        for value in range(1,14):
+#            insert_card(card.create_card(value,suit), deck)
+#    if add_jokers:
+#        for i in range(2):
+#            insert_card(card.create_card(0,i+1), deck)
+#    return deck
+
+def create_solitare_deck():
+    deck = ['deck', []]
+    suit = 1;
+    for value in range(1,27):
+        if value > 13:
+            suit = 2
+        insert_card(card.create_card(value,suit), deck)
+    for i in range(2):
+        insert_card(card.create_card(27, i+1), deck)
     return deck
 
 def find_card(deck, card):
