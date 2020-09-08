@@ -12,8 +12,8 @@ import random
 #        for i in range(2):
 #            insert_card(card.create_card(0,i+1), deck)
 #    return deck
-
-def create_solitare_deck():
+def create_solitaire_deck(seed):
+    random.seed(seed)
     deck = ['deck', []]
     suit = 1;
     for value in range(1,27):
@@ -22,6 +22,7 @@ def create_solitare_deck():
         insert_card(card.create_card(value,suit), deck)
     for i in range(2):
         insert_card(card.create_card(27, i+1), deck)
+    shuffle_deck(deck)
     return deck
 
 def find_card(deck, card):
