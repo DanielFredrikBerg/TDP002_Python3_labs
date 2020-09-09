@@ -25,8 +25,11 @@ def create_solitaire_deck(seed):
     shuffle_deck(deck)
     return deck
 
-def find_card(deck, card):
+def find_index(deck, card):
     return deck[1].index(card)
+
+def find_bottom_index(deck):
+    return len(deck[1])-1
 
 def split_deck(deck, position):
     deck_slice = ['deck',[]]
@@ -38,7 +41,7 @@ def split_deck(deck, position):
 def insert_card(card, deck, pos = 0):
     deck[1].insert(pos, card)
 
-def pick_card(deck, pos):
+def pick_card(deck, pos = 0):
     return deck[1][pos]
 
 def take_card(deck, pos):
