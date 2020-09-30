@@ -101,12 +101,11 @@ gen_list = lambda func, integer: [func(variable) for variable in range(1, intege
 #5f
 add = lambda x, y: x + y
 
-def partial(func, value):
-    return lambda y: func(value, y)
+def partial(func, condition):
+    return lambda value: func(condition, value)
 
 add_five = partial(add, 5)
 #print(add_five(3))
-
 
 #5g
 m_5 = lambda x: x * 5
@@ -120,11 +119,36 @@ composition = compose(a_10, m_5)
 
 
 #5h
+#lista = [num for num in range(10)]
+
+#filt_func = lambda x: x % 2 == 1
+#pow_func = lambda x: x * x
+
+def make_filter_map_test(filt_func, pow_func):
+    def new_func(lista):
+        ue_filter_func = partial(filter, filt_func)
+        pow_function = partial(map, pow_func)
+        multiplied_func = compose(pow_function, ue_filter_func)
+        return list(multiplied_func(lista))
+    return new_func
+
+#print(list(ue_filter_func(lista)))
+#print(list(multiplied_func(lista)))
+
+process = make_filter_map_test(lambda x: x % 2 == 1, lambda x: x * x)
+print(process(range(10)), 'test', sep='\t')
+
+
+
 def make_filter_map(filt_func, map_func):
     return lambda lista: [map_func(item) for item in lista if filt_func(item)]
 
-process = make_filter_map(lambda x: x % 2 == 1, lambda x: x * x)
-print(process(range(10)))
+c_answer = make_filter_map(lambda x: x % 2 == 1, lambda x: x * x)
+print(c_answer(range(10)), 'right answer', sep='\t')
+
+
+
+
 
 
 
