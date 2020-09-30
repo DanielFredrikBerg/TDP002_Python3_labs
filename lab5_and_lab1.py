@@ -26,8 +26,8 @@ def somefunc(func, tal):
 
 summa = lambda x: x + summa(x-1) if (x > 0) else 0
 prod = lambda x: x * prod(x-1) if (x > 1) else 1
-#print(somefunc(summa,512))
-#print(somefunc(prod,512))
+print(somefunc(summa,512))
+print(somefunc(prod,512))
 
 #5b
 db = [
@@ -42,21 +42,21 @@ def search_db(db, search_field, search_string):
         if dic[search_field] == search_string:
             search_results.append(dic)
     return search_results
-#print(search_db(db, 'position', 'examiner'))
+print(search_db(db, 'position', 'examiner'))
 
 #5c
 haystack = 'Can you find the needle in this haystack?'.split()
 def contains(word, haystack):
     return haystack.__contains__(word)
-#print(contains('needle', haystack))
+print(contains('needle', haystack))
 
 def contains2(word, haystack):
     found = [oword for oword in haystack if oword == word]
     return bool(found)
-#print(contains2('needle', haystack))
+print(contains2('needle', haystack))
 
 contains3 = lambda word, haystack: bool([oword for oword in haystack if oword == word])
-#print(contains3('needle', haystack))
+print(contains3('needle', haystack))
 
 #5d
 def cat_func(path):
@@ -96,7 +96,7 @@ while(False):
 #5e
 def stars(n): return '*' * n
 gen_list = lambda func, integer: [func(variable) for variable in range(1, integer +1)]
-#print(gen_list(stars, 3))
+print(gen_list(stars, 3))
 
 #5f
 add = lambda x, y: x + y
@@ -105,7 +105,7 @@ def partial(func, condition):
     return lambda value: func(condition, value)
 
 add_five = partial(add, 5)
-#print(add_five(3))
+print(add_five(3))
 
 #5g
 m_5 = lambda x: x * 5
@@ -115,7 +115,7 @@ def compose(F_a, F_b):
     return lambda x: F_a(F_b(x))
     
 composition = compose(a_10, m_5)
-#print(composition(3))
+print(composition(3))
 
 
 #5h
@@ -141,6 +141,13 @@ print(process(range(10)), 'test', sep='\t')
 
 
 def make_filter_map(filt_func, map_func):
+    l = [i for i in range(10)]
+    print(filter(filt_func, l))
+
+make_filter_map(lambda x: x % 2 == 1, lambda x: x * x)
+
+
+def make_filter_map2(filt_func, map_func):
     return lambda lista: [map_func(item) for item in lista if filt_func(item)]
 
 c_answer = make_filter_map(lambda x: x % 2 == 1, lambda x: x * x)
