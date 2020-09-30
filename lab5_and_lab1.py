@@ -150,8 +150,6 @@ print(c_answer(range(10)), 'right answer', sep='\t')
 
 
 
-
-
 #Uppgift 1c, minsta positiva talet delbart med alla heltal 1 till och med 13
 num = 0
 complete = True
