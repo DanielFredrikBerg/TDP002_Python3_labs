@@ -132,6 +132,8 @@ def make_filter_map_test(filt_func, pow_func):
         return list(multiplied_func(lista))
     return new_func
 
+def make_filter_map_test2(filt_func, pow_func): return lambda l: list(compose(partial(filter, filt_func), partial(map, pow_func)))
+
 #print(list(ue_filter_func(lista)))
 #print(list(multiplied_func(lista)))
 
