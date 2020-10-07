@@ -9,7 +9,7 @@ def linear_search(lista, value, func=None):
         for item in lista:
             if func(item) == value:
                 return item
-
+        return None
 
 def binary_search():
     pass
@@ -21,8 +21,10 @@ def main():
     print(b, c, sep='\t')
 
     imdb_list = [{'title': 'Professional Help', 'actress': 'Big Chungus', 'score': 2}, {'title': 'Raising an error', 'actress': 'Big Cobra', 'score': 5}, {'title': 'Raise your voice', 'actress': 'Hilary Duff', 'score': 10}]
-    chungus = linear_search(imdb_list, 'Big Chungus', func=lambda e: e['actress'])
-    print(chungus)
+    chungus = linear_search(imdb_list, 'Big Cobra', func=lambda e: e['actress'])
+    ph =  linear_search(imdb_list, 'Professional Help', func=lambda e: e['title'])
+    not_found = linear_search(imdb_list, 'Something Else', func=lambda e: e['title'])
+    print(chungus, ph, not_found, sep='\n')
 
 
 
