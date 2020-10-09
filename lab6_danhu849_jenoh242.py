@@ -15,7 +15,6 @@ def binary_search(sorted_list, needle, comp_func=None):
     minst = 0
     högst = len(sorted_list)
     average = int(högst/2)
-    #print(sorted_list[average])
     if sorted_list[average] == needle:
         return sorted_list[average]
     elif sorted_list[average] < needle:
@@ -32,14 +31,37 @@ def insertion_sort(lista, func):
                 if func(temp) < func(lista[j]):
                     lista.insert(j, temp)
                     break
+
+def quicksort(lista, func):
+    if len(lista) <= 1:
+        return lista
+    else:
+        pivot = func(lista[int(len(lista)/2)])
+        #print("pivot: ", pivot)
+        #print("LISTA: ", lista)
+        pivot_index = int(len(lista)/2)
+        left_lista = []
+        right_lista = []
+        for i in range(0, pivot_index):
+            if func(lista[i]) < pivot:
+                left_lista.append(lista[i])
+            else:
+                right_lista.append(lista[i])
+        for j in range(pivot_index + 1, len(lista)):
+            if func(lista[j]) < pivot:
+                left_lista.append(lista[j])
+            else:
+                right_lista.append(lista[j])
+        #print('left lista: ', left_lista)
+        #print('right lista ', right_lista)
+        return quicksort(left_lista, func) + quicksort([lista[int(len(lista)/2)]], func) + quicksort(right_lista, func)
             
-                
-                        
     
+
     
 def main():
     # Linear Search
-    a_list = [num for num in range(100)]
+    # a_list = [num for num in range(100)]
     # b = linear_search(a_list, -1)
     # c = linear_search(a_list, 16)
     # print(b, c, sep='\t')
@@ -54,13 +76,19 @@ def main():
     #print('BS: ', bs_res)
 
     # Insertion Sort
-    db = [
-        ('j', 'g'), ('a', 'u'), ('k', 'l'), ('o', 'i'),
-        ('b', 's'), ('@', '.'), ('p', 's'), ('o', 'e')
-    ]
-    print(db)
-    insertion_sort(db, lambda e: e[0])
-    print(db)
+    # db = [
+    #     ('j', 'g'), ('a', 'u'), ('k', 'l'), ('o', 'i'),
+    #     ('b', 's'), ('@', '.'), ('p', 's'), ('o', 'e')
+    # ]
+    #print(db)
+    # insertion_sort(db, lambda e: e[0])
+    # print('Sorted by first element: ', db)
+    # insertion_sort(db, lambda e: e[1])
+    # print('Sorted by second element: ', db)
+    
+    # Quicksort
+    #sorted_db = quicksort(db, lambda e: e[0])
+    #print('Quicksorted db: ', sorted_db)
     
 if __name__ == '__main__':
     main()
