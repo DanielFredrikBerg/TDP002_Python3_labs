@@ -17,13 +17,13 @@ def main():
             check_file_type = str(sys.argv[4])
         elif str(sys.argv[3]) == '-u':
             if file_dest.__contains__('.'):
-                new_file_name = file_dest.split('.')[0] + str(sys.argv[4])
+                new_file_name = file_dest.split('.')[0] + '.' + str(sys.argv[4])
             else:
                 new_file_name = file_dest + str(sys.argv[4])
 
     is_file = True
-    #if str(file_dest)[-1] == '/':
-        #is_file = False
+    if str(file_dest)[-1] == '/':
+        is_file = False
 
     if is_file:
         with open(str(cp_file), 'r') as cr_file:
@@ -35,17 +35,21 @@ def main():
         
 
     rewritten = re.sub(r'(?<=BEGIN COPYRIGHT)([\S\s]*?)(?=END COPYRIGHT)', copyright_text, dest_content)
-                
+
+    print(new_file_name)
     if check_file_type:
-        if filename[-len(check_file_type):] == check_file_type:
+        if file_dest[-len(check_file_type):] == check_file_type:
             if new_file_name:
                 with open(str(new_file_name), 'w') as rw_file:
                     rw_file.write(rewritten)
             else:    
-                with open(str(file_dest) + new_file_type, 'w') as rw_file:
+                with open(str(file_dest), 'w') as rw_file:
                     rw_file.write(rewritten)
         else:
-            print(file_dest, ': Invalid file')
+            print(file_dest, ': Invalid file. File not of type', check_file_type)
+    elif new_file_name:
+        with open(str(new_file_name), 'w') as rw_file:
+            rw_file.write(rewritten)
     else:
         with open(str(file_dest), 'w') as rw_file:
             rw_file.write(rewritten)

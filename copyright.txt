@@ -1,3 +1,2 @@
-BEGIN COPYRIGHT
-This is my copyrighted property!
-END COPYRIGHT
+
+This is my copyrighted property as it stands within this text!
