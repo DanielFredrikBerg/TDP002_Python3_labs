@@ -3,16 +3,7 @@ import sys
 import os
 import re
 
-
-def main():
-    check_file_type = ''
-    new_file_name = ''
-    try:
-        cp_file = sys.argv[1]
-        file_dest = sys.argv[2]
-    except Exception:
-        print("Please specify BOTH copyright info file and file destination.")
-    
+def add_copyright(file_dest, cp_file, check_file_type = '', new_file_name = ''):
     if len(sys.argv) == 5:
         if str(sys.argv[3]) == '-c':
             check_file_type = str(sys.argv[4])
@@ -30,27 +21,19 @@ def main():
                     new_file_name = file_dest.split('.')[0] + '.' + str(sys.argv[argument + 1])
                 else:
                     new_file_name = file_dest + str(sys.argv[argument + 1])
-        
-        
 
-    is_file = True
-    if str(file_dest)[-1] == '/':
-        is_file = False
+    with open(str(cp_file), 'r') as cr_file:
+        copyright_text = cr_file.read()
 
-    if is_file:
-        with open(str(cp_file), 'r') as cr_file:
-            copyright_text = cr_file.read()
-
-        with open(str(file_dest), 'r') as destination_f:
-            dest_content = destination_f.read()        
+    with open(str(file_dest), 'r') as destination_f:
+        dest_content = destination_f.read()        
 
     rewritten = re.sub(r'(?<=BEGIN COPYRIGHT)([\S\s]*?)(?=END COPYRIGHT)', copyright_text, dest_content)
 
-    
     if check_file_type:
         if file_dest[-len(check_file_type):] == check_file_type:
             if new_file_name:
-                with open(str(new_file_name), 'w') as rw_file:
+                with open(new_file_name, 'w') as rw_file:
                     rw_file.write(rewritten)
             else:    
                 with open(str(file_dest), 'w') as rw_file:
@@ -63,8 +46,27 @@ def main():
     elif len(sys.argv) == 3:
         with open(str(file_dest), 'w') as rw_file:
             rw_file.write(rewritten)
-        
 
+def main():
+    check_file_type = ''
+    new_file_name = ''
+    try:
+        cp_file = sys.argv[1]
+        file_dest = sys.argv[2]
+    except Exception:
+        print("Please specify BOTH copyright info file and file destination.")
+       
+        
+    if str(file_dest)[-1] == '/':
+        top_directory = file_dest
+        for parent, directories, files in os.walk(str(top_directory)):
+            for file_name in files:
+                print(file_name)
+                add_copyright(os.path.join(parent, file_name), cp_file, check_file_type, new_file_name)
+    else:
+        print(new_file_name)
+        add_copyright(file_dest, cp_file, check_file_type, new_file_name)
+                
     
 if __name__ == '__main__':
     main()
