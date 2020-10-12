@@ -15,13 +15,21 @@ def binary_search(sorted_list, needle, comp_func=None):
     minst = 0
     högst = len(sorted_list)
     average = int(högst/2)
-    if sorted_list[average] == needle:
-        return sorted_list[average]
-    elif sorted_list[average] < needle:
-        return binary_search(sorted_list[average:högst], needle, func)
-    elif sorted_list[average] > needle:
-        return binary_search(sorted_list[minst:average], needle, func)
-
+    if comp_func == None:
+        if sorted_list[average] == needle:
+            return sorted_list[average]
+        elif sorted_list[average] < needle:
+            return binary_search(sorted_list[average:högst], needle)
+        elif sorted_list[average] > needle:
+            return binary_search(sorted_list[minst:average], needle)
+    else:
+        if comp_func(sorted_list[average]) == needle:
+            return sorted_list[average]
+        elif comp_func(sorted_list[average]) < needle:
+            return binary_search(sorted_list[average:högst], needle, comp_func)
+        elif comp_func(sorted_list[average]) > needle:
+            return binary_search(sorted_list[minst:average], needle, comp_func)
+    
 
 def insertion_sort(lista, func):
     for i in range(1, len(lista)):
@@ -61,7 +69,8 @@ def quicksort(lista, func):
     
 def main():
     # Linear Search
-    # a_list = [num for num in range(100)]
+    a_list = [num for num in range(100)]
+    tupel_list = [(num%5==0, num * 2 + 1) for num in range(200,250)]
     # b = linear_search(a_list, -1)
     # c = linear_search(a_list, 16)
     # print(b, c, sep='\t')
@@ -72,9 +81,13 @@ def main():
     # print(chungus, ph, not_found, sep='\n')
     
     # Binary Search
-    #bs_res = binary_search(a_list, 70)
-    #print('BS: ', bs_res)
-
+    stl = quicksort(tupel_list, lambda e: e[1])
+    print(stl)
+    bs_tupel = binary_search(stl, 449, lambda e: e[1])
+    bs_res = binary_search(a_list, 70)
+    print('BS: ', bs_res)
+    print(bs_tupel)
+    
     # Insertion Sort
     # db = [
     #     ('j', 'g'), ('a', 'u'), ('k', 'l'), ('o', 'i'),
