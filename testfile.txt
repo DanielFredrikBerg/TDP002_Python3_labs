@@ -1,0 +1,7 @@
+BEGIN COPYRIGHT
+Here's a bunch of text that doesn't say shit woop di wopp woppdd
+
+
+END COPYRIGHT
+
+BEGIN COPYRIGHTMore text for cpcpcpcEND COPYRIGHT

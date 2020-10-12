@@ -1,0 +1,3 @@
+BEGIN COPYRIGHT
+This is my copyrighted property!
+END COPYRIGHT
