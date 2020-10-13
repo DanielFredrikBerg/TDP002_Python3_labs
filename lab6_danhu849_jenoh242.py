@@ -1,35 +1,66 @@
 #!/usr/bin/python3
 
-# Linjärsökning
-def linear_search(lista, value, func=None):
-    if func == None:
-        result = [item for item in lista if item == value]
-        return result[0] if len(result) > 0 else print("No element found")
-    else:
-        for item in lista:
-            if func(item) == value:
-                return item
-        return None
+# Linjärsökning VERSION 1
+# def linear_search(lista, value, func=None):
+#     if func == None:
+#         result = [item for item in lista if item == value]
+#         return result[0] if len(result) > 0 else print("No element found")
+#     else:
+#         for item in lista:
+#             if func(item) == value:
+#                 return item
+#         return None
 
-def binary_search(sorted_list, needle, comp_func=None):
-    minst = 0
-    högst = len(sorted_list)
-    average = int(högst/2)
-    if comp_func == None:
-        if sorted_list[average] == needle:
-            return sorted_list[average]
-        elif sorted_list[average] < needle:
-            return binary_search(sorted_list[average:högst], needle)
-        elif sorted_list[average] > needle:
-            return binary_search(sorted_list[minst:average], needle)
-    else:
-        if comp_func(sorted_list[average]) == needle:
-            return sorted_list[average]
-        elif comp_func(sorted_list[average]) < needle:
-            return binary_search(sorted_list[average:högst], needle, comp_func)
-        elif comp_func(sorted_list[average]) > needle:
-            return binary_search(sorted_list[minst:average], needle, comp_func)
+# LINJÄRSÖKNING VERSION 2
+def linear_search(haystack, needle, filt=lambda e: " ".join([str(item[1]) for item in e.items()])):
+	for straw in haystack:
+		if str(needle).lower() in str(filt(straw)).lower():
+			return straw
 
+# BINARY SEARCH VERSION 1
+# def binary_search(sorted_list, needle, comp_func=None):
+#     minst = 0
+#     högst = len(sorted_list)
+#     average = int(högst/2)
+#     if comp_func == None:
+#         if sorted_list[average] == needle:
+#             return sorted_list[average]
+#         elif sorted_list[average] < needle:
+#             return binary_search(sorted_list[average:högst], needle)
+#         elif sorted_list[average] > needle:
+#             return binary_search(sorted_list[minst:average], needle)
+#     else:
+#         if comp_func(sorted_list[average]) == needle:
+#             return sorted_list[average]
+#         elif comp_func(sorted_list[average]) < needle:
+#             return binary_search(sorted_list[average:högst], needle, comp_func)
+#         elif comp_func(sorted_list[average]) > needle:
+#             return binary_search(sorted_list[minst:average], needle, comp_func)
+
+# BINARY SEARCH VERSION 2
+def binary_search(haystack, needle, filt = None):
+	if len(haystack) == 1:
+		if haystack[0] == needle:
+			return haystack[0]
+		else:
+			return None
+	if not filt:
+		for key in haystack[0].keys():
+			awnser = binary_search(haystack, needle, lambda e: e[key])
+			if awnser:
+				return awnser
+	else:
+		middle = int(len(haystack)/2)
+		needle = str(needle)
+		middle_straw = str(filt(haystack[middle]))
+		if needle == middle_straw:
+			return haystack[middle]
+		elif needle > middle_straw:
+			return binary_search(haystack[:middle], needle, filt)
+		elif needle < middle_straw:
+			return binary_search(haystack[middle:], needle, filt)
+
+        
 def insertion_sort(lista, func):
     for i in range(1, len(lista)):
         if func(lista[i]) < func(lista[i-1]):

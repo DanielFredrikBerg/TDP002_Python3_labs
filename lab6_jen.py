@@ -67,8 +67,10 @@ def binary_search(haystack, needle, filt = None):
 def main():
 	#print(linear_search(content, 9000, filt = lambda e: e['lulz_had']))
 
-	print("Hello", binary_search(people2, 19))
-	#print(insertion_sort(people2, lambda e: e['age']))
-
+        print("Hello", binary_search(people2, 19))
+        #print(insertion_sort(people2, lambda e: e['age']))
+        haystack = [(1,2),(3,4),(5,6)]
+        print(linear_search(haystack, 3, lambda e: e[0]))
+              
 if __name__ == "__main__":
 	main()
