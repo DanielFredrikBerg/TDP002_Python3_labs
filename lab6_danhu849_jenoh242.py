@@ -10,7 +10,7 @@ def linear_search(lista, value, func=None):
             if func(item) == value:
                 return item
         return None
-    
+
 def binary_search(sorted_list, needle, comp_func=None):
     minst = 0
     högst = len(sorted_list)
@@ -29,7 +29,6 @@ def binary_search(sorted_list, needle, comp_func=None):
             return binary_search(sorted_list[average:högst], needle, comp_func)
         elif comp_func(sorted_list[average]) > needle:
             return binary_search(sorted_list[minst:average], needle, comp_func)
-    
 
 def insertion_sort(lista, func):
     for i in range(1, len(lista)):
@@ -63,10 +62,8 @@ def quicksort(lista, func):
         #print('left lista: ', left_lista)
         #print('right lista ', right_lista)
         return quicksort(left_lista, func) + quicksort([lista[int(len(lista)/2)]], func) + quicksort(right_lista, func)
-            
-    
 
-    
+
 def main():
     # Linear Search
     a_list = [num for num in range(100)]
@@ -79,7 +76,7 @@ def main():
     # ph =  linear_search(imdb_list, 'Professional Help', func=lambda e: e['title'])
     # not_found = linear_search(imdb_list, 'Something Else', func=lambda e: e['title'])
     # print(chungus, ph, not_found, sep='\n')
-    
+
     # Binary Search
     stl = quicksort(tupel_list, lambda e: e[1])
     print(stl)
@@ -87,7 +84,7 @@ def main():
     bs_res = binary_search(a_list, 70)
     print('BS: ', bs_res)
     print(bs_tupel)
-    
+
     # Insertion Sort
     # db = [
     #     ('j', 'g'), ('a', 'u'), ('k', 'l'), ('o', 'i'),
@@ -98,11 +95,10 @@ def main():
     # print('Sorted by first element: ', db)
     # insertion_sort(db, lambda e: e[1])
     # print('Sorted by second element: ', db)
-    
     # Quicksort
     #sorted_db = quicksort(db, lambda e: e[0])
     #print('Quicksorted db: ', sorted_db)
-    
+
 if __name__ == '__main__':
     main()
 
